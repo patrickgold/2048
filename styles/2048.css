@@ -1,0 +1,338 @@
+/*!
+ * 2048.css
+ * Stylesheet for the game 2048.
+ *
+ * Author: Patrick Goldinger
+ * License: MIT
+ */
+
+html,body { height: 100%; }
+
+body {
+    background-color: #ddd;
+    font-family: Tahoma, Geneva, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.noselect {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+a {
+    color: #000;
+    text-decoration: underline;
+}
+
+button {
+    background-color: #333;
+    border: 0;
+    border-radius: 4px;
+    color: #eee;
+    font-size: 1.1em;
+    height: 2.4em;
+    min-height: 2.4em;
+    max-height: 2.4em;
+    margin: 0;
+    padding: 0px 8px;
+}
+button:hover {
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 3em;
+    margin: 30px 0;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #777;
+    margin: 30px 0px;
+    padding: 0;
+    width: 100%;
+}
+
+.line-spacing {
+    line-height: 1.5em;
+}
+
+.content {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0 20px;
+    overflow: auto;
+    width: 100%;
+    max-width: 640px;
+}
+
+.content__row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.settings-btn {
+    background: none;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 28px 28px;
+    border-radius: 100%;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    margin: 30px 0 30px 10px;
+    padding: 10px;
+    position: relative;
+    transition: 200ms;
+    width: 50px;
+}
+.settings-btn:hover {
+    background-color: #bbb;
+}
+.settings-btn::after {
+    display: block;
+    opacity: 0;
+    transition: all 200ms;
+}
+.settings-btn:hover::after {
+    background-color: #333;
+    border-radius: 4px;
+    color: #eee;
+    content: attr(data-tooltip);
+    display: block;
+    font-size: 0.7em;
+    left: 50%;
+    transition: 200ms;
+    opacity: 1;
+    padding: 4px 8px;
+    position: absolute;
+    top: 90%;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+.score-container {
+    align-items: center;
+    background-color: #999;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 6px;
+    padding: 6px 12px;
+}
+.score-container__label {
+    display: flex;
+}
+.score-container__value {
+    display: flex;
+    font-weight: bolder;
+}
+
+#newgame {
+    margin-left: auto;
+}
+
+#fieldspace {
+    position: relative;
+}
+
+.endgame {
+    background-color: rgba(0,0,0,0.75);
+    border-radius: 4px;
+    left: 50%;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+.endgame[data-endgame-box="disabled"] {
+    padding: 0px;
+}
+.endgame h2 {
+    color: #eee;
+    margin: 0px 0px 20px 0px;
+}
+.endgame button {
+    display: block;
+    margin: 0px auto;
+}
+.endgame__box-win,
+.endgame__box-lose {
+    display: none;
+}
+.endgame[data-endgame-box="win"] .endgame__box-win {
+    display: block;
+}
+.endgame[data-endgame-box="lose"] .endgame__box-lose {
+    display: block;
+}
+
+noscript {
+    background-color: rgb(126, 0, 0);
+    border: 0;
+    border-radius: 4px;
+    color: #eee;
+    margin: 30px 0px;
+    padding: 10px;
+}
+
+.G2048 {
+    background-color: #333;
+    border-radius: 4px;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto;
+    padding: 6px;
+    position: relative;
+}
+.G2048 .row {
+    display: flex;
+    flex-direction: row;
+}
+.G2048 .row .tile {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 4px;
+    display: flex;
+    font-size: 1.3em;
+    font-weight: bolder;
+    height: 60px;
+    justify-content: center;
+    margin: 6px;
+    width: 60px;
+}
+.G2048 .row .tile.v0 {
+    background-color: #444;
+}
+.G2048 .row .tile.v2 {
+    background-color: #fff;
+}
+.G2048 .row .tile.v4 {
+    background-color: #efefef;
+}
+.G2048 .row .tile.v8 {
+    background-color: #eee;
+}
+.G2048 .row .tile.v16 {
+    background-color: #dedede;
+}
+.G2048 .row .tile.v32 {
+    background-color: #ddd;
+}
+.G2048 .row .tile.v64 {
+    background-color: #cdcdcd;
+}
+.G2048 .row .tile.v128 {
+    background-color: #ccc;
+}
+.G2048 .row .tile.v256 {
+    background-color: #bcbcbc;
+}
+.G2048 .row .tile.v512 {
+    background-color: #bbb;
+}
+.G2048 .row .tile.v1024 {
+    background-color: #ababab;
+}
+.G2048 .row .tile.v2048 {
+    background-color: #aaa;
+}
+
+.footer {
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+
+/*********************/
+/*** COOKIE BANNER ***/
+/*********************/
+
+.cookie-banner {
+    background-color: #bbb;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    margin: 30px auto 0px auto;
+    transition: all 200ms ease-out;
+    width: 100%;
+    max-width: 600px;
+}
+body[data-cookie-banner="hide"] .cookie-banner {
+    height: 0;
+    margin: 0;
+    opacity: 0;
+    z-index: -100;
+}
+.cookie-banner__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px;
+}
+.cookie-banner__text b {
+    display: flex;
+    margin: 0px 0px 10px 0px;
+}
+.cookie-banner__buttons {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+#cookie-accept {
+    margin-bottom: 10px;
+}
+#cookie-settings-btn {
+    background-image: url("../media/icon-cookie-settings-black.png");
+    margin-left: auto;
+}
+
+
+/**********************/
+/*** PRIVACY POLICY ***/
+/**********************/
+
+.privacy {
+    line-height: 1.5em;
+    text-align: justify;
+}
+
+.privacy h1 {
+    font-size: 1.5em;
+    margin-top: 50px;
+}
+.privacy h2 {
+    font-size: 1.2em;
+    margin-top: 30px;
+}
+
+.privacy pre {
+    background-color: #ccc;
+    border-radius: 3px;
+    display: inline;
+    font-size: 1.1em;
+    margin-right: 5px;
+    padding: 2px 5px;
+}
+
+
+
+#theme-settings-btn {
+    background-image: url("../media/icon-theme-brush-black.png");
+}
+
+
+@media screen and (max-width: 640px) {
+    .cookie-banner {
+        border-radius: 0px;
+        margin: 0px auto;
+    }
+}

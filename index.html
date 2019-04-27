@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#333">
+    <meta name="author" content="Patrick Goldinger">
+    <meta name="description" content="Play the game 2048 in the browser!">
+    <title>2048</title>
+    <link rel="stylesheet" href="styles/2048.css" type="text/css">
+    <script src="scripts/js.cookie.js"></script>
+    <script src="scripts/G2048.js"></script>
+    <script src="scripts/2048.js"></script>
+</head>
+
+<body data-cookie-banner="show" data-theme="default">
+    <script>
+        // cookie banner aut hide done here to prevent carzy transition.
+        if (typeof Cookies.get("cookiesAccepted") !== "undefined") {
+            document.body.setAttribute("data-cookie-banner", "hide");
+        }
+    </script>
+    <div class="content">
+        <div class="cookie-banner">
+            <div class="cookie-banner__text">
+                <b>Cookie consent</b>
+                <span>This site uses cookies for saving your current game status, highscore and theme choice. <a href="./privacy.html#cookies" rel="noreferrer noopener">More info</a><br><br>Current cookie status: <i id="cookie-status">Disabled</i></span>
+            </div>
+            <div class="cookie-banner__buttons">
+                <button id="cookie-accept">Accept</button><button id="cookie-deny">Deny</button>
+            </div>
+        </div>
+        <div class="content__row">
+            <h1>2048</h1>
+            <button class="settings-btn" id="cookie-settings-btn" data-tooltip="Cookies"></button>
+            <button class="settings-btn" id="theme-settings-btn" data-tooltip="Theme"></button>
+        </div>
+        <div class="content__row">
+            <div class="score-container">
+                <span class="score-container__label">Score</span>
+                <span class="score-container__value" id="score">0</span>
+            </div>
+            <div class="score-container">
+                <span class="score-container__label">Best</span>
+                <span class="score-container__value" id="highscore">0</span>
+                </div>
+            <button id="newgame">New game</button>
+        </div>
+        <div class="content__row" id="fieldspace">
+            <!-- game field is inserted by js here -->
+            <div class="endgame noselect" id="endgame" data-endgame-box="disabled">
+                <div class="endgame__box-win">
+                    <h2>You Won!</h2>
+                    <button id="playagain">Play again</button>
+                </div>
+                <div class="endgame__box-lose">
+                    <h2>Game over!</h2>
+                    <button id="tryagain">Try again</button>
+                </div>
+            </div>
+            <noscript>It seems that JavaScript is disabled in your browser. In order for the game to work properly, you need to enable it.</noscript>
+        </div>
+        <div class="content__row">
+            <span class="line-spacing"><b>How to play: </b>Move the tiles with WASD or your arrow keys. When two tiles with the same number touch, they will merge into one!<br><b>The goal: </b>Reach the 2048 tile!</span>
+        </div>
+        <hr>
+        <div class="content__row">
+            <span class="line-spacing">This game is based on the game 2048 created by <a href="http://gabrielecirulli.com/" rel="noreferrer noopener">Gabriele Cirulli</a>, itself based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" rel="noreferrer noopener">1024 by Veewo Studio</a> conceptually similar to <a href="http://asherv.com/threes/" rel="noreferrer noopener">Threes by Asher Vollmer</a>.</span>
+        </div>
+        <hr>
+        <footer class="content__row footer">
+            <a href="https://github.com/patrickgold/2048" rel="noreferrer noopener">View on GitHub</a>&nbsp;&bull;&nbsp;
+            <a href="./privacy.html" rel="noreferrer noopener">Privacy Policy</a>&nbsp;&bull;&nbsp;
+            <span>v0.1.0</span>
+        </footer>
+    </div>
+</body>
+
+</html>
