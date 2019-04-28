@@ -70,7 +70,7 @@ const G2048 = function () {
         while (1) {
             if (typeof values[i + 1] !== "undefined") {
                 if (values[i] == values[i + 1]) {
-                    g.lastScoreIncrease = values[i] * 2;
+                    g.lastScoreIncrease += values[i] * 2;
                     g.score += values[i] * 2;
                     if (values[i] * 2 == 2048) {
                         g.is2048Reached = true;
@@ -115,12 +115,12 @@ const G2048 = function () {
         }
         // fill two random fields with initial value (2 or 4)
         let f1 = getRandomInt(0, g.size ** 2 - 1);
-        g.field[f1 % g.size][Math.floor(f1 / g.size)] = Math.random() > 0.7 ? 4 : 2;
+        g.field[f1 % g.size][Math.floor(f1 / g.size)] = Math.random() > 0.8 ? 4 : 2;
         let f2 = f1;
         while (f1 == f2) {
             f2 = getRandomInt(0, g.size ** 2 - 1);
         }
-        g.field[f2 % g.size][Math.floor(f2 / g.size)] = Math.random() > 0.7 ? 4 : 2;
+        g.field[f2 % g.size][Math.floor(f2 / g.size)] = Math.random() > 0.8 ? 4 : 2;
         // game is now valid
         g.isGameRunning = true;
         g.isGameValid = true;
@@ -345,7 +345,7 @@ const G2048 = function () {
             if (g.field[n % g.size][Math.floor(n / g.size)] == 0) {
                 freeSpotCount++;
                 if (Math.random() > 0.7 && sthMoved) {
-                    g.field[n % g.size][Math.floor(n / g.size)] = Math.random() > 0.7 ? 4 : 2;
+                    g.field[n % g.size][Math.floor(n / g.size)] = Math.random() > 0.8 ? 4 : 2;
                     break;
                 } else if ((n == g.size ** 2 - 1) && sthMoved) {
                     n = -1; // reset counter

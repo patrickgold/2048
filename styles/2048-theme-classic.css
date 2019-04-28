@@ -1,0 +1,114 @@
+/*!
+ * Theme file "Classic".
+ *
+ * Author: Patrick Goldinger
+ * License: MIT
+ */
+
+body { 
+    background-color: #faf8ef;
+    color: #776e65;
+}
+
+a {
+    color: #776e65;
+}
+
+button {
+    background-color: #8f7a66;
+    color: #f9f6f2;
+}
+
+hr {
+    border-top-color: #d8d4d0;
+}
+
+*[data-tooltip]:hover::after {
+    background-color: #333;
+    color: #eee;
+}
+
+.score-container {
+    background-color: #bbada0;
+    color: #fff;
+}
+.score-container__label {
+    color: #eee4da;
+}
+.score-container__increase {
+    color: rgba(119, 110, 101, 0.9);
+}
+
+.endgame {
+    background-color: rgba(0,0,0,0.75);
+}
+.endgame h2 {
+    color: #eee;
+}
+
+noscript {
+    background-color: rgba(126,0,0);
+    color: #eee;
+}
+
+.G2048 {
+    background-color: #bbada0;
+}
+.G2048 .row .tile {
+    background-color: #eee4da;
+}
+.G2048 .row .tile.v0 {
+    background-color: rgba(238, 228, 218, 0.35);
+}
+.G2048 .row .tile.v2 {
+    background-color: #eee4da;
+}
+.G2048 .row .tile.v4 {
+    background-color: #ede0c8;
+}
+.G2048 .row .tile.v8 {
+    background-color: #f2b179;
+    color: #f9f6f2;
+}
+.G2048 .row .tile.v16 {
+    background-color: #f59563;
+    color: #f9f6f2;
+}
+.G2048 .row .tile.v32 {
+    background-color: #f67c5f;
+    color: #f9f6f2;
+}
+.G2048 .row .tile.v64 {
+    background-color: #f65e3b;
+    color: #f9f6f2;
+}
+.G2048 .row .tile.v128 {
+    background-color: #edcf72;
+    color: #f9f6f2;
+}
+.G2048 .row .tile.v256 {
+    background-color: #edcc61;
+    color: #f9f6f2;
+}
+.G2048 .row .tile.v512 {
+    background-color: #edc850;
+    color: #f9f6f2;
+}
+.G2048 .row .tile.v1024 {
+    background-color: #edc53f;
+    color: #f9f6f2;
+}
+.G2048 .row .tile.v2048 {
+    background-color: #edc22e;
+    color: #f9f6f2;
+}
+
+.cookie-banner {
+    background-color: #e7e4e0;
+}
+#cookie-settings-btn {
+    background-image: url("../media/icon-cookie-settings-black.png");
+}
+body[data-theme-bar="hide"] #theme-settings-btn {
+    background-image: url("../media/icon-theme-brush-black.png");
+}

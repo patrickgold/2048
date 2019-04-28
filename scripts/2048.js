@@ -19,19 +19,23 @@ window.addEventListener("load", function () {
         newgameBtn: document.getElementById("newgame"),
         playagainBtn: document.getElementById("playagain"),
         score: document.getElementById("score"),
+        themeBar: document.getElementById("theme-bar"),
         themeSettingsBtn: document.getElementById("theme-settings-btn"),
+        themeStylesheet: document.getElementById("theme-stylesheet"),
         tryagainBtn: document.getElementById("tryagain")
     };
     var cookiesAccepted = false;
     var initData = null;
     var game = new G2048();
     var highscore = 0;
+    var themeName = "default";
 
     function enableCookies() {
         cookiesAccepted = true;
         Cookies.set("cookiesAccepted", true, { expires: 365 });
         Cookies.set("gameSession", game.isGameRunning() ? game.getDataObject() : null, { expires: 365 });
         Cookies.set("highscore", highscore, { expires: 365 });
+        Cookies.set("themeName", themeName, { expires: 365 });
         ele.cookieStatus.innerHTML = "Enabled";
     }
     function disableCookies() {
@@ -39,10 +43,11 @@ window.addEventListener("load", function () {
         Cookies.set("cookiesAccepted", false, { expires: 365 });
         Cookies.remove("gameSession");
         Cookies.remove("highscore");
-        Cookies.remove("theme");
+        Cookies.remove("themeName");
         ele.cookieStatus.innerHTML = "Disabled";
     }
 
+    // auto cookie read
     if (typeof Cookies.get("cookiesAccepted") !== "undefined") {
         document.body.setAttribute("data-cookie-banner", "hide");
         if (Cookies.get("cookiesAccepted") == "true") {
@@ -59,12 +64,16 @@ window.addEventListener("load", function () {
             if (typeof Cookies.get("highscore") !== "undefined") {
                 ele.highscore.innerHTML = highscore = parseInt(Cookies.get("highscore"), 10);
             }
+            if (typeof Cookies.get("themeName") !== "undefined") {
+                themeName = Cookies.get("themeName");
+            }
         } else {
             cookiesAccepted = false;
             ele.cookieStatus.innerHTML = "Disabled";
         }
     }
 
+    // cookie consent management
     ele.cookieAcceptBtn.addEventListener("click", function () {
         document.body.setAttribute("data-cookie-banner", "hide");
         enableCookies();
@@ -81,9 +90,36 @@ window.addEventListener("load", function () {
         }
     }, false);
 
-    ele.themeSettingsBtn.addEventListener("click", function () {
-        alert("Feature not implemented yet!");
-    }, false);
+    // Theme management
+    function toggleThemeBar() {
+        if (document.body.getAttribute("data-theme-bar") == "hide") {
+            document.body.setAttribute("data-theme-bar", "show");
+        } else {
+            document.body.setAttribute("data-theme-bar", "hide");
+        }
+    }
+    ele.themeSettingsBtn.addEventListener("click", toggleThemeBar, false);
+    function loadTheme(name) {
+        themeName = name.toLowerCase();
+            console.log("Loading theme '" + themeName + "'...");
+        ele.themeStylesheet.setAttribute("href", "styles/2048-theme-" + themeName + ".css");
+        if (cookiesAccepted) {
+            Cookies.set("themeName", themeName, { expires: 365 });
+        }
+        for (let themeButton of ele.themeBar.getElementsByTagName("button")) {
+            if (themeButton.getAttribute("data-tooltip").toLowerCase() == themeName) {
+                themeButton.setAttribute("data-active", "");
+            } else {
+                themeButton.removeAttribute("data-active");
+            }
+        }
+    }
+    loadTheme(themeName);
+    for (let themeButton of ele.themeBar.getElementsByTagName("button")) {
+        themeButton.addEventListener("click", function () {
+            loadTheme(this.getAttribute("data-tooltip"));
+        }, false);
+    }
 
     function updateGameField(container) {
         container.className += " noselect";
@@ -151,6 +187,15 @@ window.addEventListener("load", function () {
             game.moveTiles(dir);
             updateGameField(game.generateHTML());
             ele.score.innerHTML = game.getScore();
+            if (game.getLastScoreIncrease() >= 2) {
+                let scoreIncrease = document.createElement("span");
+                scoreIncrease.className = "score-container__increase";
+                scoreIncrease.innerHTML = "+" + game.getLastScoreIncrease();
+                ele.score.parentElement.appendChild(scoreIncrease);
+                setTimeout(function () {
+                    scoreIncrease.parentElement.removeChild(scoreIncrease);
+                }, 1500);
+            }
             if (game.getScore() > highscore) {
                 ele.highscore.innerHTML = highscore = game.getScore();
                 if (cookiesAccepted) {

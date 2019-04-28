@@ -42,6 +42,9 @@ button {
 button:hover {
     cursor: pointer;
 }
+button::-moz-focus-inner {
+    border: 0;
+}
 
 h1 {
     font-size: 3em;
@@ -74,6 +77,7 @@ hr {
 .content__row {
     display: flex;
     flex-direction: row;
+    position: relative;
     width: 100%;
 }
 
@@ -81,26 +85,22 @@ hr {
     background: none;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 28px 28px;
+    background-size: 26px 26px;
     border-radius: 100%;
-    height: 50px;
-    min-height: 50px;
-    max-height: 50px;
-    margin: 30px 0 30px 10px;
-    padding: 10px;
+    height: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    margin: 40px 0 40px 10px;
     position: relative;
     transition: 200ms;
     width: 50px;
 }
-.settings-btn:hover {
-    background-color: #bbb;
-}
-.settings-btn::after {
+*[data-tooltip]::after {
     display: block;
     opacity: 0;
     transition: all 200ms;
 }
-.settings-btn:hover::after {
+*[data-tooltip]:hover::after {
     background-color: #333;
     border-radius: 4px;
     color: #eee;
@@ -112,7 +112,7 @@ hr {
     opacity: 1;
     padding: 4px 8px;
     position: absolute;
-    top: 90%;
+    top: 115%;
     transform: translateX(-50%);
     z-index: 100;
 }
@@ -125,21 +125,38 @@ hr {
     flex-direction: column;
     margin-right: 6px;
     padding: 6px 12px;
+    position: relative;
 }
 .score-container__label {
+    color: #333;
     display: flex;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin: 5px 0;
 }
 .score-container__value {
     display: flex;
     font-weight: bolder;
 }
+@keyframes score-increase {
+    from {
+        bottom: 10%;
+        opacity: 1;
+    }
+    to {
+        bottom: 150%;
+        opacity: 0;
+    }
+}
+.score-container__increase {
+    animation: score-increase 1.5s ease 0s 1 forwards;
+    color: #eee;
+    font-weight: bolder;
+    position: absolute;
+}
 
 #newgame {
     margin-left: auto;
-}
-
-#fieldspace {
-    position: relative;
 }
 
 .endgame {
@@ -175,7 +192,7 @@ hr {
 }
 
 noscript {
-    background-color: rgb(126, 0, 0);
+    background-color: rgb(126,0,0);
     border: 0;
     border-radius: 4px;
     color: #eee;
@@ -296,6 +313,78 @@ body[data-cookie-banner="hide"] .cookie-banner {
 }
 
 
+/*****************/
+/*** THEME BAR ***/
+/*****************/
+
+.theme-bar {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    overflow: none;
+    padding: 0 50px 0 10px;
+    position: absolute;
+    right: 0;
+    transition: all 200ms;
+    transform: scaleX(1);
+    transform-origin: right;
+    top: 30px;
+    z-index: 20;
+}
+body[data-theme-bar="hide"] .theme-bar {
+    transform: scaleX(0);
+    z-index: -100;
+}
+.theme-bar_pre {
+    background: none;
+    border: none;
+    border-radius: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    margin-right: 10px;
+    padding: 0;
+    position: relative;
+    transition: 50ms;
+    width: 30px;
+    min-width: 30px;
+    max-width: 30px;
+}
+.theme-bar_pre[data-active] {
+    border: 2px solid #000;
+    padding: 2px;
+}
+.theme-bar_pre:not([data-active]):hover {
+    border: 2px solid #888;
+    padding: 2px;
+}
+.theme-bar_pre span {
+    display: block;
+    height: 100%;
+    transform: rotate(45deg);
+    width: 50%;
+}
+.theme-bar_pre span:nth-child(1) {
+    border-radius: 60px 0 0 60px;
+    transform-origin: center right;
+}
+.theme-bar_pre span:nth-child(2) {
+    border-radius: 0 60px 60px 0;
+    transform-origin: center left;
+}
+#theme-settings-btn {
+    background-image: url("../media/icon-theme-brush-black.png");
+    z-index: 21;
+}
+
+
 /**********************/
 /*** PRIVACY POLICY ***/
 /**********************/
@@ -325,9 +414,6 @@ body[data-cookie-banner="hide"] .cookie-banner {
 
 
 
-#theme-settings-btn {
-    background-image: url("../media/icon-theme-brush-black.png");
-}
 
 
 @media screen and (max-width: 640px) {
