@@ -200,7 +200,7 @@ noscript {
     padding: 10px;
 }
 
-.G2048 {
+#G2048 {
     background-color: #333;
     border-radius: 4px;
     cursor: default;
@@ -210,11 +210,12 @@ noscript {
     padding: 6px;
     position: relative;
 }
-.G2048 .row {
+#G2048 .base-grid-row {
     display: flex;
     flex-direction: row;
 }
-.G2048 .row .tile {
+#G2048 .base-grid-row .tile-empty,
+#G2048 .tile {
     align-items: center;
     background-color: #fff;
     border-radius: 4px;
@@ -226,40 +227,76 @@ noscript {
     margin: 6px;
     width: 60px;
 }
-.G2048 .row .tile.v0 {
+#G2048 .base-grid-row .tile-empty {
     background-color: #444;
 }
-.G2048 .row .tile.v2 {
+#G2048 .tile {
+    margin: 0;
+    position: absolute;
+    transition: 200ms ease 0s;
+    z-index: 35;
+}
+@keyframes new-tile {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+#G2048 .tile.new {
+    animation: new-tile 150ms ease 0s 1 forwards;
+    transform-origin: center center;
+}
+@keyframes merged-tile {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+#G2048 .tile.merged {
+    animation: merged-tile 150ms ease 0s 1 forwards;
+    transform-origin: center center;
+    z-index: 36;
+}
+#G2048 .tile.v2 {
     background-color: #fff;
 }
-.G2048 .row .tile.v4 {
+#G2048 .tile.v4 {
     background-color: #efefef;
 }
-.G2048 .row .tile.v8 {
+#G2048 .tile.v8 {
     background-color: #eee;
 }
-.G2048 .row .tile.v16 {
+#G2048 .tile.v16 {
     background-color: #dedede;
 }
-.G2048 .row .tile.v32 {
+#G2048 .tile.v32 {
     background-color: #ddd;
 }
-.G2048 .row .tile.v64 {
+#G2048 .tile.v64 {
     background-color: #cdcdcd;
 }
-.G2048 .row .tile.v128 {
+#G2048 .tile.v128 {
     background-color: #ccc;
 }
-.G2048 .row .tile.v256 {
+#G2048 .tile.v256 {
     background-color: #bcbcbc;
 }
-.G2048 .row .tile.v512 {
+#G2048 .tile.v512 {
     background-color: #bbb;
 }
-.G2048 .row .tile.v1024 {
+#G2048 .tile.v1024 {
     background-color: #ababab;
 }
-.G2048 .row .tile.v2048 {
+#G2048 .tile.v2048 {
     background-color: #aaa;
 }
 

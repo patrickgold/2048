@@ -51,54 +51,51 @@ noscript {
     color: #eee;
 }
 
-.G2048 {
+#G2048 {
     background-color: #bbada0;
 }
-.G2048 .row .tile {
-    background-color: #eee4da;
-}
-.G2048 .row .tile.v0 {
+#G2048 .base-grid-row .tile-empty {
     background-color: rgba(238, 228, 218, 0.35);
 }
-.G2048 .row .tile.v2 {
+#G2048 .tile.v2 {
     background-color: #eee4da;
 }
-.G2048 .row .tile.v4 {
+#G2048 .tile.v4 {
     background-color: #ede0c8;
 }
-.G2048 .row .tile.v8 {
+#G2048 .tile.v8 {
     background-color: #f2b179;
     color: #f9f6f2;
 }
-.G2048 .row .tile.v16 {
+#G2048 .tile.v16 {
     background-color: #f59563;
     color: #f9f6f2;
 }
-.G2048 .row .tile.v32 {
+#G2048 .tile.v32 {
     background-color: #f67c5f;
     color: #f9f6f2;
 }
-.G2048 .row .tile.v64 {
+#G2048 .tile.v64 {
     background-color: #f65e3b;
     color: #f9f6f2;
 }
-.G2048 .row .tile.v128 {
+#G2048 .tile.v128 {
     background-color: #edcf72;
     color: #f9f6f2;
 }
-.G2048 .row .tile.v256 {
+#G2048 .tile.v256 {
     background-color: #edcc61;
     color: #f9f6f2;
 }
-.G2048 .row .tile.v512 {
+#G2048 .tile.v512 {
     background-color: #edc850;
     color: #f9f6f2;
 }
-.G2048 .row .tile.v1024 {
+#G2048 .tile.v1024 {
     background-color: #edc53f;
     color: #f9f6f2;
 }
-.G2048 .row .tile.v2048 {
+#G2048 .tile.v2048 {
     background-color: #edc22e;
     color: #f9f6f2;
 }
@@ -111,4 +108,8 @@ noscript {
 }
 body[data-theme-bar="hide"] #theme-settings-btn {
     background-image: url("../media/icon-theme-brush-black.png");
+}
+
+.privacy pre {
+    background-color: #e7ded3;
 }

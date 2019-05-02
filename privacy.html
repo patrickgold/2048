@@ -9,9 +9,19 @@
     <meta name="description" content="Privacy Policy & Cookie Statement | 2048">
     <title>Privacy Policy | 2048</title>
     <link rel="stylesheet" href="styles/2048.css" type="text/css">
+    <link rel="stylesheet" href="styles/2048-theme-default.css" id="theme-stylesheet" type="text/css">
+    <script src="scripts/js.cookie.js"></script>
+    <script src="scripts/ThemeController.js"></script>
 </head>
 
 <body>
+    <script>
+        // Auto fetch theme from main site for consistent colors of UI.
+        var themeController = new ThemeController({
+            stylesheet: document.getElementById("theme-stylesheet")
+        });
+        themeController.initFromCookies(false);
+    </script>
     <div class="content privacy">
         <h1>Privacy Policy & Cookie Statement | 2048</h1>
         <span><a href="https://patrickgold.github.io/2048" rel="noreferrer noopener">https://patrickgold.github.io/2048</a> is operated and maintained by Patrick Goldinger (<a href="https://github.com/patrickgold" rel="noreferrer noopener">@patrickgold</a>). This website is hosted on servers operated by GitHub Inc. This document outlines the data handling practices for this website.</span>

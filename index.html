@@ -9,15 +9,16 @@
     <meta name="description" content="Merge the numbers and reach the 2048 tile!">
     <title>2048</title>
     <link rel="stylesheet" href="styles/2048.css" type="text/css">
-    <link rel="stylesheet" href="" id="theme-stylesheet" type="text/css">
+    <link rel="stylesheet" href="styles/2048-theme-default.css" id="theme-stylesheet" type="text/css">
     <script src="scripts/js.cookie.js"></script>
+    <script src="scripts/ThemeController.js"></script>
     <script src="scripts/G2048.js"></script>
     <script src="scripts/2048.js"></script>
 </head>
 
 <body data-cookie-banner="show" data-theme-bar="hide">
     <script>
-        // cookie banner hide done here to prevent carzy transition.
+        // cookie banner hide done here to prevent crazy transition.
         if (typeof Cookies.get("cookiesAccepted") !== "undefined") {
             document.body.setAttribute("data-cookie-banner", "hide");
         }
@@ -64,8 +65,10 @@
             </div>
             <button id="newgame">New game</button>
         </div>
-        <div class="content__row" id="fieldspace">
-            <!-- game field is inserted by JS here. -->
+        <div class="content__row gamefield">
+            <!-- #G2048 is container for whole game; JS will insert tiles and 
+                base grid into this element. -->
+            <div id="G2048"></div>
             <div class="endgame noselect" id="endgame" data-endgame-box="disabled">
                 <div class="endgame__box-win">
                     <h2>You Won!</h2>
@@ -89,7 +92,7 @@
         <footer class="content__row footer">
             <a href="https://github.com/patrickgold/2048" rel="noreferrer noopener">View on GitHub</a>&nbsp;&bull;&nbsp;
             <a href="./privacy.html" rel="noreferrer noopener">Privacy Policy</a>&nbsp;&bull;&nbsp;
-            <span>v0.2.0</span>
+            <span>v0.3.0</span>
         </footer>
     </div>
 </body>
