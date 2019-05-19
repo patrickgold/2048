@@ -40,17 +40,23 @@
             <button class="settings-btn" id="theme-settings-btn" data-tooltip="Theme"></button>
             <div class="theme-bar" id="theme-bar">
                 <button class="theme-bar_pre" data-tooltip="Default" data-active>
-                    <span style="background-color:#ccc;"></span>
-                    <span style="background-color:#333;"></span>
+                    <span class="theme-bar_pre_inner">
+                        <span style="background-color:#ccc;"></span>
+                        <span style="background-color:#777;"></span>
+                    </span>
                 </button>
                 <button class="theme-bar_pre" data-tooltip="Classic">
-                    <span style="background-color:#ede0c8;"></span>
-                    <span style="background-color:#f67c5f;"></span>
+                    <span class="theme-bar_pre_inner">
+                        <span style="background-color:#ede0c8;"></span>
+                        <span style="background-color:#f67c5f;"></span>
+                    </span>
                 </button>
-                <!-- <button class="theme-bar_pre" data-tooltip="Navy">
-                    <span style="background-color:#ccc;"></span>
-                    <span style="background-color:#008;"></span>
-                </button> -->
+                <button class="theme-bar_pre" data-tooltip="Night">
+                    <span class="theme-bar_pre_inner">
+                        <span style="background-color:#444;"></span>
+                        <span style="background-color:#111;"></span>
+                    </span>
+                </button>
             </div>
         </div>
         <div class="content__row">
@@ -68,7 +74,7 @@
         <div class="content__row gamefield">
             <!-- #G2048 is container for whole game; JS will insert tiles and 
                 base grid into this element. -->
-            <div id="G2048"></div>
+            <div id="G2048" class="noselect"></div>
             <div class="endgame noselect" id="endgame" data-endgame-box="disabled">
                 <div class="endgame__box-win">
                     <h2>You Won!</h2>
@@ -92,7 +98,7 @@
         <footer class="content__row footer">
             <a href="https://github.com/patrickgold/2048" rel="noreferrer noopener">View on GitHub</a>&nbsp;&bull;&nbsp;
             <a href="./privacy.html" rel="noreferrer noopener">Privacy Policy</a>&nbsp;&bull;&nbsp;
-            <span>v0.3.0</span>
+            <span>v0.4.0</span>
         </footer>
     </div>
 </body>

@@ -1,0 +1,117 @@
+/*!
+ * Theme file "Classic".
+ *
+ * Author: Patrick Goldinger
+ * License: MIT
+ */
+
+ body { 
+    background-color: #111;
+    color: #c4c4c4;
+}
+
+a {
+    color: #a4a4a4;
+}
+
+button {
+    background-color: #222;
+    color: #e4e4e4;
+}
+
+hr {
+    border-top-color: #c4c4c4;
+}
+
+*[data-tooltip]:hover::after {
+    background-color: #333;
+    color: #e4e4e4;
+}
+
+.score-container {
+    background-color: #222;
+    color: inherit;
+}
+.score-container__label {
+    color: #e4e4e4;
+}
+.score-container__increase {
+    color: rgba(231, 231, 231, 0.9);
+}
+
+.endgame {
+    background-color: rgba(0,0,0,0.75);
+}
+.endgame h2 {
+    color: #e4e4e4;
+}
+
+noscript {
+    background-color: rgba(126,0,0);
+    color: #e4e4e4;
+}
+
+#G2048 {
+    background-color: #000;
+    color: #776e65;
+    opacity: 0.75;
+}
+#G2048 .base-grid-row .tile-empty {
+    background-color: rgba(238, 228, 218, 0.25);
+}
+#G2048 .tile.v2 {
+    background-color: #eee4da;
+}
+#G2048 .tile.v4 {
+    background-color: #ede0c8;
+}
+#G2048 .tile.v8 {
+    background-color: #f2b179;
+    color: #f9f6f2;
+}
+#G2048 .tile.v16 {
+    background-color: #f59563;
+    color: #f9f6f2;
+}
+#G2048 .tile.v32 {
+    background-color: #f67c5f;
+    color: #f9f6f2;
+}
+#G2048 .tile.v64 {
+    background-color: #f65e3b;
+    color: #f9f6f2;
+}
+#G2048 .tile.v128 {
+    background-color: #edcf72;
+    color: #f9f6f2;
+}
+#G2048 .tile.v256 {
+    background-color: #edcc61;
+    color: #f9f6f2;
+}
+#G2048 .tile.v512 {
+    background-color: #edc850;
+    color: #f9f6f2;
+}
+#G2048 .tile.v1024 {
+    background-color: #edc53f;
+    color: #f9f6f2;
+}
+#G2048 .tile.v2048 {
+    background-color: #edc22e;
+    color: #f9f6f2;
+}
+
+.cookie-banner {
+    background-color: #333;
+}
+#cookie-settings-btn {
+    background-image: url("../media/icon-cookie-settings-white.png");
+}
+body[data-theme-bar="hide"] #theme-settings-btn {
+    background-image: url("../media/icon-theme-brush-white.png");
+}
+
+.privacy pre {
+    background-color: #2b2b2b;
+}

@@ -114,6 +114,43 @@ window.addEventListener("load", function () {
     ele.newgameBtn.addEventListener("click", initNewGame, false);
     ele.playagainBtn.addEventListener("click", initNewGame, false);
     ele.tryagainBtn.addEventListener("click", initNewGame, false);
+
+    function handleGameMove(dir) {
+        game.moveTiles(dir);
+        game.placeTiles();
+        ele.score.innerHTML = game.getScore();
+        if (game.getLastScoreIncrease() >= 2) {
+            let scoreIncrease = document.createElement("span");
+            scoreIncrease.className = "score-container__increase";
+            scoreIncrease.innerHTML = "+" + game.getLastScoreIncrease();
+            ele.score.parentElement.appendChild(scoreIncrease);
+            setTimeout(function () {
+                scoreIncrease.parentElement.removeChild(scoreIncrease);
+            }, 1500);
+        }
+        if (game.getScore() > highscore) {
+            ele.highscore.innerHTML = highscore = game.getScore();
+            if (cookiesAccepted) {
+                Cookies.set("highscore", game.getScore(), { expires: 365 });
+            }
+        }
+        if (!game.isGameRunning()) {
+            // check if won or lost
+            if (game.is2048Reached()) {
+                ele.endgame.setAttribute("data-endgame-box", "win");
+            } else {
+                ele.endgame.setAttribute("data-endgame-box", "lose");
+            }
+
+            if (cookiesAccepted) {
+                Cookies.set("gameSession", null, { expires: 365 });
+            }
+        } else {
+            if (cookiesAccepted) {
+                Cookies.set("gameSession", game.getDataObject(), { expires: 365 });
+            }
+        }
+    }
     
     document.addEventListener("keydown", function (e) {
         e = e || window.event;
@@ -145,40 +182,61 @@ window.addEventListener("load", function () {
         }
         // handle input if game is running
         if (dir != "none" && game.isGameRunning() && !e.ctrlKey && !e.altKey && !e.shiftKey) {
-            game.moveTiles(dir);
-            game.placeTiles();
-            ele.score.innerHTML = game.getScore();
-            if (game.getLastScoreIncrease() >= 2) {
-                let scoreIncrease = document.createElement("span");
-                scoreIncrease.className = "score-container__increase";
-                scoreIncrease.innerHTML = "+" + game.getLastScoreIncrease();
-                ele.score.parentElement.appendChild(scoreIncrease);
-                setTimeout(function () {
-                    scoreIncrease.parentElement.removeChild(scoreIncrease);
-                }, 1500);
-            }
-            if (game.getScore() > highscore) {
-                ele.highscore.innerHTML = highscore = game.getScore();
-                if (cookiesAccepted) {
-                    Cookies.set("highscore", game.getScore(), { expires: 365 });
-                }
-            }
-            if (!game.isGameRunning()) {
-                // check if won or lost
-                if (game.is2048Reached()) {
-                    ele.endgame.setAttribute("data-endgame-box", "win");
-                } else {
-                    ele.endgame.setAttribute("data-endgame-box", "lose");
-                }
-
-                if (cookiesAccepted) {
-                    Cookies.set("gameSession", null, { expires: 365 });
-                }
-            } else {
-                if (cookiesAccepted) {
-                    Cookies.set("gameSession", game.getDataObject(), { expires: 365 });
-                }
-            }
+            handleGameMove(dir);
         }
     }, false);
+
+    // Touch support
+    var touchStart = { x: null, y: null };
+    var touchEnd = { x: null, y: null };
+
+    document.getElementById("G2048").addEventListener("touchstart", function (e) {
+        console.log("touchstart!");
+        e = e || window.event;
+        const evtTouch = e.touches[0];
+        touchStart.x = evtTouch.clientX;
+        touchStart.y = evtTouch.clientY;
+    }, false);
+
+    document.getElementById("G2048").addEventListener("touchmove", function (e) {
+        console.log("touchmove!");
+        e = e || window.event;
+        const evtTouch = e.touches[0];
+        touchEnd.x = evtTouch.clientX;
+        touchEnd.y = evtTouch.clientY;
+    }, false);
+
+    document.getElementById("G2048").addEventListener("touchend", function (e) {
+        console.log("touchend!");
+        if (touchStart.x == null || touchEnd.x == null) {
+            return;
+        }
+        let diffX = touchEnd.x - touchStart.x;
+        let diffY = touchEnd.y - touchStart.y;
+        let dir = "none";
+        if (diffX == 0 && diffY == 0) {
+            return;
+        }
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            // swipe horizontally
+            if (diffX > 0) {
+                dir = "right";
+            } else {
+                dir = "left";
+            }
+        } else {
+            // swipe verticallys
+            if (diffY > 0) {
+                dir = "down";
+            } else {
+                dir = "up";
+            }
+        }
+        // handle input if game is running
+        if (dir != "none" && game.isGameRunning()) {
+            handleGameMove(dir);
+        }
+        touchStart = { x: null, y: null };
+        touchEnd = { x: null, y: null };
+    })
 }, false);

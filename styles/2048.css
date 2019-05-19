@@ -31,6 +31,7 @@ button {
     background-color: #333;
     border: 0;
     border-radius: 4px;
+    box-sizing: border-box;
     color: #eee;
     font-size: 1.1em;
     height: 2.4em;
@@ -209,6 +210,7 @@ noscript {
     margin: 30px auto;
     padding: 6px;
     position: relative;
+    touch-action: none;
 }
 #G2048 .base-grid-row {
     display: flex;
@@ -381,15 +383,13 @@ body[data-theme-bar="hide"] .theme-bar {
     background: none;
     border: none;
     border-radius: 100%;
-    display: flex;
-    flex-direction: row;
     height: 30px;
     min-height: 30px;
     max-height: 30px;
     margin-right: 10px;
     padding: 0;
     position: relative;
-    transition: 50ms;
+    transition: 100ms;
     width: 30px;
     min-width: 30px;
     max-width: 30px;
@@ -402,17 +402,23 @@ body[data-theme-bar="hide"] .theme-bar {
     border: 2px solid #888;
     padding: 2px;
 }
-.theme-bar_pre span {
-    display: block;
+.theme-bar_pre_inner {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
     height: 100%;
-    transform: rotate(45deg);
-    width: 50%;
+    width: 100%;
 }
-.theme-bar_pre span:nth-child(1) {
+.theme-bar_pre_inner span {
+    display: flex;
+    flex: 1;
+    transform: rotate(45deg);
+}
+.theme-bar_pre_inner span:nth-child(1) {
     border-radius: 60px 0 0 60px;
     transform-origin: center right;
 }
-.theme-bar_pre span:nth-child(2) {
+.theme-bar_pre_inner span:nth-child(2) {
     border-radius: 0 60px 60px 0;
     transform-origin: center left;
 }
@@ -454,6 +460,9 @@ body[data-theme-bar="hide"] .theme-bar {
 
 
 @media screen and (max-width: 640px) {
+    .content {
+        padding: 0 10px;
+    }
     .cookie-banner {
         border-radius: 0px;
         margin: 0px auto;
